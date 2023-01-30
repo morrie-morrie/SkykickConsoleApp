@@ -1,10 +1,13 @@
-﻿namespace SkykickApp
+﻿using SkykickClassLibrary.Helpers;
+
+namespace SkykickApp;
+
+public class Program
 {
-	internal class Program
+	static void Main(string[] args)
 	{
-		static void Main(string[] args)
-		{
-			Console.WriteLine("Hello, World!");
-		}
+		var content = SKAuth.GetCustomers();
+		Console.WriteLine(content);
+		
 	}
 }
