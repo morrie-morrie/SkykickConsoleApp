@@ -1,6 +1,7 @@
 ﻿using RestSharp;
 using System.Text;
 using Newtonsoft.Json;
+using SkykickClassLibrary.Models;
 
 namespace SkykickClassLibrary.Helpers;
 
@@ -24,14 +25,13 @@ public class SKAuth
 		RestSharp.RestRequest request = new RestSharp.RestRequest("auth/token", RestSharp.Method.Post);
 		request.AddHeader("Authorization", bearer);
 		request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-		request.AddParameter("Ocp-Apim-Subscription-Key", $"{config.subId}");
+		request.AddHeader("Ocp-Apim-Subscription-Key", $"{config.subId}");
 		request.AddParameter("grant_type=client_credentials&scope", "Partner");
 		RestSharp.RestResponse response = client.Execute(request);
 		var content = response.Content;
 		var token = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.TokenModel>(content);
 
 		return token.access_token;
-		
 	}
 	
 	public static string GetCustomers()
@@ -44,12 +44,16 @@ public class SKAuth
 		request.AddHeader("Authorization", $"Bearer {accessToken}");
 		request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
 		request.AddHeader("Ocp-Apim-Subscription-Key", $"{config.subId}");
-		//request.AddParameter("grant_type=client_credentials&scope", "Partner");
-		RestSharp.RestResponse response = client.Execute(request);
+		request.AddParameter("grant_type=client_credentials&scope", "Partner");
+		RestSharp.RestResponse<List<Customer>> response = client.Execute<List<Customer>>(request);
 		var content = response.Content;
+		var customers = JsonConvert.DeserializeObject<List<Customer>>(content);
+
+		foreach (var customer in customers)
+		{
+			Console.WriteLine(customer.CompanyName);
+		}
 
 		return content;
 	}
-	
-
 }
