@@ -6,8 +6,7 @@ public class Program
 {
 	static void Main(string[] args)
 	{
-		var content = SKAuth.GetCustomers();
-		Console.WriteLine(content);
-		
+		var response = SKAuth.GetSubscriptionSettings();
+		Console.WriteLine(response);
 	}
 }
