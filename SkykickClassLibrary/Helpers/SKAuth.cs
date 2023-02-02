@@ -7,13 +7,16 @@ namespace SkykickClassLibrary.Helpers;
 
 public class SKAuth
 {
+	static string? bearer = null;
 	public static string CreateBearer()
 	{
-		var config = SKConfigHelper.ReadAppConfig();
-		var token = $"{config.userId}" + ":" + $"{config.subId}";
-		var base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(token));
-		var bearer = "Basic " + base64;
-
+		if (bearer == null)
+		{
+			var config = SKConfigHelper.ReadAppConfig();
+			var token = $"{config.userId}" + ":" + $"{config.subId}";
+			var base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(token));
+			bearer = "Basic " + base64;
+		}
 		return bearer;
 	}
 
