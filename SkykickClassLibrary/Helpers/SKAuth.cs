@@ -81,8 +81,22 @@ public class SKAuth
 		subscriptionSettingsList.Add(subscriptionSettings);
 
 			Console.WriteLine($"Exchange Backuped Enabled: {subscriptionSettings.BackupExchangeEnabled}");
+			Console.WriteLine($"Total Exchange Mailboxs Enabled: {subscriptionSettings.TotalExchangeMailboxesEnabled}");
+			Console.WriteLine($"Total Exchange Indiviual Mailboxes Enabled: {subscriptionSettings.TotalIndividualMailboxesEnabled}");
+			Console.WriteLine($"Total Exchange Shared Resources Enabled: {subscriptionSettings.TotalSharedResourcesEnabled}");
+			Console.WriteLine();
+
 			Console.WriteLine($"Sharepoint Backup Enabled: {subscriptionSettings.BackupSharepointEnabled}");
+			Console.WriteLine($"Total Sharepoint Sites Enabled: {subscriptionSettings.TotalSharepointSitesEnabled}");
+			Console.WriteLine($"Total Sharepoint Active Licenses: {subscriptionSettings.TotalSharepointActiveLicenses}");
+			Console.WriteLine();
+			
+			Console.WriteLine($"Total OneDrive Sites Enabled: {subscriptionSettings.TotalOneDriveSitesEnabled}");
+			Console.WriteLine();
+			
 			Console.WriteLine($"Individual Mailboxes Charged: {subscriptionSettings.IndividualMailboxesCharged}");
+			Console.WriteLine($"Shared Resources Charged: {subscriptionSettings.SharedResourcesCharged}");
+			Console.WriteLine($"Total Sharepoint Licenses Charged: {subscriptionSettings.TotalSharepointLicensesCharged}");
 			Console.WriteLine();
 		}
 		return subscriptionSettingsList;
